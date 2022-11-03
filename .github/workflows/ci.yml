@@ -23,9 +23,10 @@ jobs:
       - name: Build Project
         if: github.event_name == 'push'
         run: npm run build
+      - run: npm install -g surge
       - name: Deploy to Staging
         if: github.event_name == 'push'
-        run: npm surge --project ./build --domain overconfident-wash.surge.sh
+        run: surge --project ./build --domain overconfident-wash.surge.sh
         env:
           SURGE_LOGIN: ${{secrets.SURGE_LOGIN}}
           SURGE_TOKEN: ${{secrets.SURGE_TOKEN}}
